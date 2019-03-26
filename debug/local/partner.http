@@ -1,0 +1,148 @@
+# Created By tk.kim 2018.11
+
+#------------------------------------------------ AUTH
+### Admin - login
+POST http://localhost:8080/bms/login
+
+{
+  "email": "auth@example.com",
+  "password": "password"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.body.code !== 200) return client.assert(false, response.body.message);
+  client.global.set('bms_token', response.body.data.TokenType + ' ' +response.body.data.Token);
+  if (client.global.get('bms_token') == null) return client.assert(false, "Token Not Defined!!");
+  client.assert(true, "Token Set Success!!");
+});
+%}
+
+### Admin - logout
+POST http://localhost:8080/bms/logout
+Authorization: {{bms_token}}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.body.code !== 200) return client.assert(false, response.body.message);
+  // client.global.set('bms_token', '');
+});
+%}
+
+### Admin - me
+GET http://localhost:8080/bms/auth/me
+Authorization: {{bms_token}}
+#Authorization: {{ptn_token}}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.headers.valueOf('authorization')) {
+    client.global.set('bms_token','Bearer ' + response.headers.valueOf('authorization'));
+  }
+});
+%}
+
+### 合作伙伴 - 登录
+POST http://localhost:8080/ptn/login
+
+{
+  "email": "auth@example.com",
+  "password": "123456"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.body.code !== 200) return client.assert(false, response.body.message);
+  client.global.set('ptn_token', response.body.data.TokenType + ' ' +response.body.data.Token);
+  if (client.global.get('ptn_token') == null) return client.assert(false, "Token Not Defined!!");
+  client.assert(true, "Token Set Success!!");
+});
+%}
+
+### 合作伙伴 - 登出
+POST http://localhost:8080/ptn/logout
+Authorization: {{ptn_token}}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.body.code !== 200) return client.assert(false, response.body.message);
+  client.global.set('ptn_token', '');
+});
+%}
+
+### 获取登录用户信息
+GET http://localhost:8080/ptn/auth/me
+#Authorization: {{ptn_token}}
+Authorization: {{bms_token}}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.headers.valueOf('authorization')) {
+    client.global.set('ptn_token','Bearer ' + response.headers.valueOf('authorization'));
+  }
+});
+%}
+
+### 修改个人信息
+PUT http://localhost:8080/ptn/auth
+Authorization: {{ptn_token}}
+
+{
+  "name": "JIN ZE",
+  "mobile": "01022223333"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.headers.valueOf('authorization')) {
+    client.global.set('ptn_token','Bearer ' + response.headers.valueOf('authorization'));
+  }
+});
+%}
+
+### 修改密码
+PUT http://localhost:8080/ptn/auth/password
+Authorization: {{ptn_token}}
+
+{
+  "old": "123456",
+  "new": "123456789"
+#  "old": "123456789",
+#  "new": "123456"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.headers.valueOf('authorization')) {
+    client.global.set('ptn_token','Bearer ' + response.headers.valueOf('authorization'));
+  }
+});
+%}
+
+#------------------------------------------------ CODE
+### 请求Codes
+GET http://localhost:8080/ptn/codes/HOTEL_ORDER_STATUS/options
+Authorization: {{ptn_token}}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.headers.valueOf('authorization')) {
+    client.global.set('ptn_token','Bearer ' + response.headers.valueOf('authorization'));
+  }
+});
+%}
+
+#------------------------------------------------ HOTEL
+### 获取全部酒店
+GET http://localhost:8080/ptn/hotels
+Authorization: {{ptn_token}}
+
+> {%
+client.test("Request executed successfully", function() {
+  if (response.headers.valueOf('authorization')) {
+    client.global.set('ptn_token','Bearer ' + response.headers.valueOf('authorization'));
+  }
+});
+%}
+
+###

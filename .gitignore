@@ -1,0 +1,8 @@
+.idea
+vendor
+.realize.yaml
+*.log
+application
+go.sum
+gapi
+other/healthcheck

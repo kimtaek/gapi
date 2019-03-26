@@ -1,0 +1,24 @@
+mode: debug
+logs:
+  system: logs/system.log
+
+debug:
+  app_secret: base64:KD7aNLpM1gNkXcEBrl63j90bpJ9dqOb56xKEnVpDl2Q=
+  jwt_secret: OOAvNWCSacXXo9qeRnREXXXpbIM2InVx
+  jwt_ttl: 1
+  jwt_trt: 20
+  slack_incoming_url: https://hooks.slack.com/services/XXX/XXX/XXX
+
+test:
+  app_secret: base64:KD7aNLpM1gNkXcEBrl63j90bpJ9dqOb56xKEnVpDl2Q=
+  jwt_secret: OOAvNWCSacXXo9qeRnREXXXpbIM2InVx
+  jwt_ttl: 1
+  jwt_trt: 20
+  slack_incoming_url: https://hooks.slack.com/services/XXX/XXX/XXX
+
+release:
+  app_secret: base64:KD7aNLpM1gNkXcEBrl63j90bpJ9dqOb56xKEnVpDl2Q=
+  jwt_secret: OOAvNWCSacXXo9qeRnREXXXpbIM2InVx
+  jwt_ttl: 1
+  jwt_trt: 20
+  slack_incoming_url: https://hooks.slack.com/services/XXX/XXX/XXX

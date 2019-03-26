@@ -1,0 +1,47 @@
+debug:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: password
+    max_idle_connections: 10
+    max_open_connections: 0
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: root
+    database: homestead
+    max_idle_connections: 5
+    max_open_connections: 30
+
+test:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: password
+    max_idle_connections: 10
+    max_open_connections: 0
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: root
+    database: homestead
+    max_idle_connections: 5
+    max_open_connections: 30
+
+release:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: password
+    max_idle_connections: 10
+    max_open_connections: 0
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: root
+    database: homestead
+    max_idle_connections: 5
+    max_open_connections: 30
